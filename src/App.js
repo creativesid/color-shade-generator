@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import ShadeInput from './components/ShadeInput';
+import Shades from './components/Shades';
+import randomColor from 'randomcolor'
 
 function App() {
+  const [color,setColor] = useState('#6e33d1');
+  useEffect(()=>{
+    setColor(randomColor())
+  },[])
+
+  const onInputChange =(val)=>{
+    setColor(val)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ShadeInput color={color} onInputChange={onInputChange} />
+      <Shades color={color}/>
     </div>
   );
 }
